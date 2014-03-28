@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <style type="text/css">
+        a{display: inline-block;padding:5px 15px;}
+        .selected{color:red;text-decoration: none;font-weight: bold;font-size:20px;}
+        .disable{color:#333; text-decoration: none;cursor: default}
+    </style>
+</head>
+<body>
+    <div id="pager"></div>
+    <script type="text/javascript" src="http://img.wan.ijinshan.com/thirdpart/jquery/1.8.2/jquery.min.js"></script>
+    <script type="text/javascript" src="js/pagination/1.0.0/pagination-debug.js" charset="utf-8"></script>
+    <script type="text/javascript">
+    $(function(){
+        $('#pager').pagination({
+            pageNumber : 1,
+            maxLength : 5,
+            change : function(pageNumber){
+                
+            }
+        });
+    });
+    </script>
+</body>
+</html>
