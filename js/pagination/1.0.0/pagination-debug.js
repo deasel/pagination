@@ -35,7 +35,7 @@
             start = null,
             end = null,
             pageTotal = opts.pageTotal || (pageNumber || 1),
-            maxLength = opts.maxLength < 5 ? 5 : opts.maxLength,
+            maxLength = opts.maxLength < pageTotal ? opts.maxLength : pageTotal,
             halfLength = (maxLength/2)>>>0,
             isFirst = pageNumber === 1 ? true : false,
             isLast = pageNumber >= pageTotal ? true : false,
@@ -182,7 +182,7 @@
             el = $el[0];
 
         if(typeof param === 'string'){
-            var result = Global[param] ? Global[param](el, options) : '';
+            var result = Global.Methods[param] ? Global.Methods[param](el, options) : '';
             result = result === undefined ? $el : result;
 
             return result;
@@ -195,12 +195,31 @@
     };
 
     Global.Methods = {
+        /*
+         *  重新初始化组建
+         */
+        reload : function(el, opts){
+            var options = $.data(el, COMP_MARK);
+            $.data(el, COMP_MARK, $.extend({}, options, opts));
+            compInit($el);
+        }
+        /*
+         *  
+         */
         option : function(el, key){
             var options = $.data(el, COMP_MARK);
             return options[(key || '')] || '';
         },
         change : function(el, callback){
 
+        },
+        /*
+         *  销毁插件
+         */
+        destory : function(el){
+            $('input.jump-input', el).unbind('.' + COMP_MARK);
+            $('button.jump-btn', el).unbind('.' + COMP_MARK);
+            $(el).remove();
         }
     };
 
